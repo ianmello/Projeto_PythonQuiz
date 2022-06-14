@@ -73,14 +73,16 @@ def change_text(self, newtext, color="white"):
 
 
 questions = [["Para que serve a funcao type? "], [" Mostrar o tipo de dado" , "Escolher o tipo de um dado", "Mudar o tipo do dado", "Verificar o dado"],
-             ["Pra que serve a / em python ?"], ["Fazer um comentario", "Separar linhas","Realizar uma divisao", "Iniciar uma indexacao"],
-             ["Qual a estrutura cujos valores sao imutaveis?"], ["Lista ", "Classe","Tupla", "String"],
+             ["Pra que serve a / em Python ?"], ["Fazer um comentario", "Separar linhas","Realizar uma divisao", "Iniciar uma indexacao"],
+             ["Qual NAO eh uma estrutura condicional em Python?"], ["if", "elif","for", "else"],
              ["Para o calculo de potencia, em Python, usa-se?"], ["*", "x ","**", "*2"], 
              ["Em Python para que serve a funcao print ?"], ["Para tirar uma print do programa", "Para exibir uma print na tela ","Para exibir uma mensagem na tela", "Para colar algo na tela"]]
 
-questions2 = [["Quais são operadores lógicos, em Python? "], [" in, for e and" , "and, or e not ","else, if e and",  "elif, not e while"],
-              ["Em Python, utiliza-se para representar string? "], [" % " , " '' ","@",  " // "],
-              ["Em Python, utiliza-se para representar string? "], [" % " , " '' ","@",  " // "]]
+questions2 = [["Quais sao operadores logico, em Python? "], [" in, for e and" , "and, or e not ","else, if e and",  "elif, not e while"],
+              ["Em Python, utiliza-se para representar string? "], [" %(Porcento) " , " ''(Aspas) ","@(Arroba)",  " //(Barras) "],
+              ["Quais das variaveis eh valida em Python? "], ["99garrafas" , "Ano Fiscal ","vendas_anuais",  "#2021julho"],
+              ["Qual a estrutura cujos valores sao imutaveis? "], ["Lista ", "Classe","Tupla", "String"],
+              ["Qual das palavras reservadas NAO existe em Python? "], ["new" , "raise","while",  "not"]]
 
 pergunta = 0
 qnum = 1
