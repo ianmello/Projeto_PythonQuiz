@@ -28,6 +28,7 @@ FERRO = pygame.image.load("ferro.png")
 BRONZE = pygame.image.load("bronze.png")
 OURO = pygame.image.load("ouro.png")
 PLATINA = pygame.image.load("platina.png")
+CORRETO = pygame.image.load("corretocheck.png")
 class Button():
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
 		self.image = image
@@ -79,9 +80,9 @@ questions = [["Para que serve a funcao type? "], [" Mostrar o tipo de dado" , "E
 
 questions2 = [["Quais sao operadores logico, em Python? "], [" in, for e and" , "and, or e not ","else, if e and",  "elif, not e while"],
               ["Em Python, utiliza-se para representar string? "], [" %(Porcento) " , " ''(Aspas) ","@(Arroba)",  " //(Barras) "],
-              ["Quais das variaveis eh valida em Python? "], ["99garrafas" , "Ano Fiscal ","vendas_anuais",  "#2021julho"],
-              ["Qual a estrutura cujos valores sao imutaveis? "], ["Lista ", "Classe","Tupla", "String"],
-              ["Qual das palavras reservadas NAO existe em Python? "], ["new" , "raise","while",  "not"]]
+              ["Quais das variaveis eh valida em Python? "], ["99garrafas" ,"vendas_anuais", "Ano Fiscal ","#2021julho"],
+              ["Qual a estrutura cujos valores sao imutaveis? "], ["Lista ","Tupla", "Classe", "String"],
+              ["Qual das palavras reservadas NAO existe em Python? "], [ "raise","new","while",  "not"]]
 
 pergunta = 0
 qnum = 1
@@ -95,6 +96,9 @@ def proxima_questao():
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         SCREEN.blit(PG, (0, 0))
         if pergunta == len(questions):
+            if pontos >= 3:
+                score(pontos)
+                desafio1()
             mostra_pontos()
         PERGUNTA2 = get_font(35).render(questions[pergunta][0], True, "White")
         PLAY_RECT2 = PERGUNTA2.get_rect(center=(610, 150))
@@ -143,6 +147,9 @@ def questao2():
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         SCREEN.blit(PG, (0, 0))
         if pergunta == len(questions):
+            if pontos >= 3:
+                score(pontos)
+                desafio1()
             mostra_pontos()
         PERGUNTA2 = get_font(35).render(questions[pergunta][0], True, "White")
         PLAY_RECT2 = PERGUNTA2.get_rect(center=(610, 150))
@@ -196,8 +203,8 @@ def proxima_questao2():
         if pergunta2 == len(questions):
             if pontos2 >= 3:
                 score(pontos2)
-                desafio()
-                mostra_pontos2()
+                desafio2()
+            mostra_pontos2()
         PERGUNTA2 = get_font(35).render(questions2[pergunta2][0], True, "White")
         PLAY_RECT2 = PERGUNTA2.get_rect(center=(610, 150))
         SCREEN.blit(PERGUNTA2, PLAY_RECT2)
@@ -245,8 +252,9 @@ def questao3():
         SCREEN.blit(PG, (0, 0))
         if pergunta2 == len(questions):
             if pontos2 >= 3:
-                desafio()
-                mostra_pontos2()
+                score(pontos2)
+                desafio2()
+            mostra_pontos2()
         PERGUNTA2 = get_font(35).render(questions2[pergunta2][0], True, "White")
         PLAY_RECT2 = PERGUNTA2.get_rect(center=(610, 150))
         SCREEN.blit(PERGUNTA2, PLAY_RECT2)
@@ -364,6 +372,89 @@ def mostra_pontos2():
                 if BACK.checkForInput(LEVEL_MOUSE_POS):
                     select_level()
             pygame.display.update() 
+
+def mostra_pontosdes1():
+    global rank
+    while True:
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+        SCREEN.blit(BKP, (0, 0))
+        TELA_PONTOS = Button(image=None, pos=(640, 180), 
+                                    text_input= f"SUA PONTUACAO FOI DE: {pontos} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_DESC = Button(image=None, pos=(640, 80), text_input= f"DESAFIO CORRETO ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        if pontos == 1:
+            rank = 'Ferro'
+        elif pontos == 2:
+            rank = 'Bronze'
+        elif pontos == 3:
+            rank = 'Prata'
+        elif pontos == 4:
+            rank = 'Ouro'
+        elif pontos == 5:
+            rank = 'Platina'
+        else :
+            rank = 'Sem rank'
+        TELA_RANK = Button(image=None, pos=(640, 270), 
+                                    text_input=f"SEU RANK SERÁ: {rank} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_PONTOS.update(SCREEN)
+        TELA_RANK.update(SCREEN)
+        TELA_DESC.update(SCREEN)
+        SCREEN.blit(CORRETO, (960,47))
+        BACK = Button(image=None, pos=(640, 450), 
+                            text_input="BACK", font=get_fontlevel(75), base_color="White", hovering_color="Green")
+        BACK.changeColor(LEVEL_MOUSE_POS)
+        BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK.checkForInput(LEVEL_MOUSE_POS):
+                    select_level()
+            pygame.display.update() 
+    
+    
+
+def mostra_pontosdes2():
+    global rank2
+    while True:
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+        SCREEN.blit(BKP, (0, 0))
+        TELA_PONTOS = Button(image=None, pos=(640, 180), 
+                                    text_input= f"SUA PONTUACAO FOI DE: {pontos2} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_DESC = Button(image=None, pos=(640, 80), text_input= f"DESAFIO CORRETO ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        if pontos2 == 1:
+            rank2 = 'Ferro'
+        elif pontos2 == 2:
+            rank2 = 'Bronze'
+        elif pontos2 == 3:
+            rank2 = 'Prata'
+        elif pontos2 == 4:
+            rank2 = 'Ouro'
+        elif pontos2 == 5:
+            rank2 = 'Platina'
+        else :
+            rank2 = 'Sem rank'
+        TELA_RANK = Button(image=None, pos=(640, 270), 
+                                    text_input=f"SEU RANK SERÁ: {rank2} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_PONTOS.update(SCREEN)
+        TELA_RANK.update(SCREEN)
+        TELA_DESC.update(SCREEN)
+        SCREEN.blit(CORRETO, (960,47))
+        BACK = Button(image=None, pos=(640, 450), 
+                            text_input="BACK", font=get_fontlevel(75), base_color="White", hovering_color="Green")
+        BACK.changeColor(LEVEL_MOUSE_POS)
+        BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK.checkForInput(LEVEL_MOUSE_POS):
+                    select_level()
+            pygame.display.update() 
+    
     
 def play2():
     
@@ -378,13 +469,13 @@ def play2():
         SCREEN.blit(PERGUNTA1, PLAY_RECT1)
 
         A = Button(image=None, pos=(290, 420), 
-                            text_input= questions2[1][1], font=get_fontresp(22), base_color="yellow", hovering_color="green")
+                            text_input= questions2[1][0], font=get_fontresp(22), base_color="yellow", hovering_color="green")
         B = Button(image=None, pos=(910, 420), 
-                            text_input = questions2[1][3], font=get_fontresp(22), base_color="yellow", hovering_color="green")
+                            text_input = questions2[1][1], font=get_fontresp(22), base_color="yellow", hovering_color="green")
         C = Button(image=None, pos=(295, 610), 
-                            text_input = questions2[1][0], font=get_fontresp(22), base_color="yellow", hovering_color="green")
+                            text_input = questions2[1][2], font=get_fontresp(22), base_color="yellow", hovering_color="green")
         D = Button(image=None, pos=(910, 595), 
-                            text_input= questions2[1][2], font=get_fontresp(22), base_color="yellow", hovering_color="green")
+                            text_input= questions2[1][3], font=get_fontresp(22), base_color="yellow", hovering_color="green")
         
         score(pontos2)
         A.changeColor(PLAY_MOUSE_POS)
@@ -414,7 +505,59 @@ def play2():
                     
         pygame.display.update()
 
-def desafio():
+def desafio1():
+    while True:
+        DES_MOUSE_POS = pygame.mouse.get_pos()
+
+        SCREEN.fill("black")
+        SCREEN.blit(PG, (0, 0))
+        
+        DESAFIO = get_fontselect(60).render("DESAFIO", True, "White")
+        PERGUNTA1 = get_font(35).render("Print(4.00/(2.0+2.0))", True, "White")
+        PERGUNTA2 = get_font(35).render("Qual o resultado dessa expressao?", True, "White")
+        DES_RECT = DESAFIO.get_rect(center=(610, 110))
+        PLAY_RECT1 = PERGUNTA1.get_rect(center=(610, 170))
+        PLAY_RECT2 = PERGUNTA2.get_rect(center=(610, 210))
+        SCREEN.blit(PERGUNTA1, PLAY_RECT1)
+        SCREEN.blit(PERGUNTA2, PLAY_RECT2)
+        SCREEN.blit(DESAFIO, DES_RECT)
+
+        A = Button(image=None, pos=(290, 420), 
+                            text_input= "1.0", font=get_fontresp(22), base_color="yellow", hovering_color="green")
+        B = Button(image=None, pos=(910, 420), 
+                            text_input = "2", font=get_fontresp(22), base_color="yellow", hovering_color="green")
+        C = Button(image=None, pos=(295, 610), 
+                            text_input = "0", font=get_fontresp(22), base_color="yellow", hovering_color="green")
+        D = Button(image=None, pos=(910, 595), 
+                            text_input= "4", font=get_fontresp(22), base_color="yellow", hovering_color="green")
+        
+        A.changeColor(DES_MOUSE_POS)
+        A.update(SCREEN)
+        B.changeColor(DES_MOUSE_POS)
+        B.update(SCREEN)
+        C.changeColor(DES_MOUSE_POS)
+        C.update(SCREEN)
+        D.changeColor(DES_MOUSE_POS)
+        D.update(SCREEN)
+        
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if A.checkForInput(DES_MOUSE_POS):
+                    mostra_pontosdes1()
+                if B.checkForInput(DES_MOUSE_POS):
+                    mostra_pontos()
+                if C.checkForInput(DES_MOUSE_POS):               
+                    mostra_pontos()
+                if D.checkForInput(DES_MOUSE_POS):               
+                    mostra_pontos()
+                    
+        pygame.display.update()
+        
+
+def desafio2():
     while True:
         DES_MOUSE_POS = pygame.mouse.get_pos()
 
@@ -438,7 +581,7 @@ def desafio():
         C = Button(image=None, pos=(295, 610), 
                             text_input = "[4,3,2,1]", font=get_fontresp(22), base_color="yellow", hovering_color="green")
         D = Button(image=None, pos=(910, 595), 
-                            text_input= "5", font=get_fontresp(22), base_color="yellow", hovering_color="green")
+                            text_input= "4", font=get_fontresp(22), base_color="yellow", hovering_color="green")
         
         A.changeColor(DES_MOUSE_POS)
         A.update(SCREEN)
@@ -461,7 +604,7 @@ def desafio():
                 if C.checkForInput(DES_MOUSE_POS):               
                     mostra_pontos2()
                 if D.checkForInput(DES_MOUSE_POS):               
-                    mostra_pontos2()
+                    mostra_pontosdes2()
                     
         pygame.display.update()
         
@@ -502,7 +645,7 @@ def play():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if A.checkForInput(PLAY_MOUSE_POS):
-                    proxima_questao() 
+                    proxima_questao()
                 if B.checkForInput(PLAY_MOUSE_POS):
                     proxima_questao()               
                 if C.checkForInput(PLAY_MOUSE_POS):               
@@ -522,20 +665,17 @@ def select_level():
         SCREEN.blit(SL, (-50, 20))
         SCREEN.blit(LVL, (3, -10))
         SCREEN.blit(LVL, (100, -10))
-        SCREEN.blit(LVL, (187, -10))
         SCREEN.blit(RANK, (300, 290))
         
         
         SELECT = get_fontselect(55).render("SELECIONE O LEVEL?", True, "White")
-        SELECT_RECT = SELECT.get_rect(center=(610, 140))
+        SELECT_RECT = SELECT.get_rect(center=(610, 145))
         SCREEN.blit(SELECT, SELECT_RECT)
         
         q1 =  Button(image=None, pos=(365, 405), 
                              text_input="1", font=get_fontlevel(70), base_color="white", hovering_color="green")
         q2 =  Button(image=None, pos=(462, 405), 
                              text_input="2", font=get_fontlevel(70), base_color="white", hovering_color="green")
-        q3 =  Button(image=None, pos=(551, 405), 
-                             text_input="3", font=get_fontlevel(70), base_color="white", hovering_color="green")
         BACK = Button(image=None, pos=(640, 650), 
                             text_input="BACK", font=get_fontlevel(75), base_color="Black", hovering_color="Green")
         RANKS = Button(image=None, pos=(1000, 540), 
@@ -550,8 +690,6 @@ def select_level():
         q1.update(SCREEN)
         q2.changeColor(LEVEL__MOUSE_POS)
         q2.update(SCREEN)
-        q3.changeColor(LEVEL__MOUSE_POS)
-        q3.update(SCREEN)
         BACK.changeColor(LEVEL__MOUSE_POS)
         BACK.update(SCREEN)
         
@@ -745,10 +883,6 @@ def chama_segunda_tela():
         primeira_tela.label_3.setText("Dados de login incorretos")
         primeira_tela.label_3.setStyleSheet("color: red")
 
-def logout():
-    segunda_tela.close()
-    primeira_tela.show()
-    
 def logout_cadastro():
     tela_cadastro.close()
     primeira_tela.show()
@@ -779,7 +913,7 @@ def cadastrar():
 
                     banco.commit() 
                     banco.close()
-                    tela_cadastro.pushButton.clicked.connect(logout_cadastro)  
+                    tela_cadastro.pushButton.clicked.connect(logout_cadastro)
 
                 except sqlite3.Error as erro:
                     tela_cadastro.label_6.setText('Conta já existente.')
@@ -800,11 +934,9 @@ def cadastrar():
 app=QtWidgets.QApplication([])
 primeira_tela=uic.loadUi("primeira_tela.ui")
 primeira_tela.setWindowTitle("Login")
-segunda_tela = uic.loadUi("segunda_tela.ui")
 tela_cadastro = uic.loadUi("tela_cadastro.ui")
 tela_cadastro.setWindowTitle("Cadastro")
 primeira_tela.pushButton.clicked.connect(chama_segunda_tela)
-segunda_tela.pushButton.clicked.connect(logout)
 primeira_tela.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
 primeira_tela.pushButton_2.clicked.connect(abre_tela_cadastro)
 tela_cadastro.pushButton.clicked.connect(cadastrar)
