@@ -28,7 +28,9 @@ FERRO = pygame.image.load("ferro.png")
 BRONZE = pygame.image.load("bronze.png")
 OURO = pygame.image.load("ouro.png")
 PLATINA = pygame.image.load("platina.png")
+SEMRANK = pygame.image.load("semrank.png")
 CORRETO = pygame.image.load("corretocheck.png")
+ERRADO = pygame.image.load("errado.png")
 class Button():
 	def __init__(self, image, pos, text_input, font, base_color, hovering_color):
 		self.image = image
@@ -391,7 +393,7 @@ def mostra_pontosdes1():
             rank = 'Ouro'
         elif pontos == 5:
             rank = 'Platina'
-        else :
+        else:
             rank = 'Sem rank'
         TELA_RANK = Button(image=None, pos=(640, 270), 
                                     text_input=f"SEU RANK SERÁ: {rank} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
@@ -441,6 +443,87 @@ def mostra_pontosdes2():
         TELA_RANK.update(SCREEN)
         TELA_DESC.update(SCREEN)
         SCREEN.blit(CORRETO, (960,47))
+        BACK = Button(image=None, pos=(640, 450), 
+                            text_input="BACK", font=get_fontlevel(75), base_color="White", hovering_color="Green")
+        BACK.changeColor(LEVEL_MOUSE_POS)
+        BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK.checkForInput(LEVEL_MOUSE_POS):
+                    select_level()
+            pygame.display.update() 
+    
+
+def erro_des1():
+    global rank
+    while True:
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+        SCREEN.blit(BKP, (0, 0))
+        TELA_PONTOS = Button(image=None, pos=(640, 180), 
+                                    text_input= f"SUA PONTUACAO FOI DE: {pontos} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_DESC = Button(image=None, pos=(640, 80), text_input= f"DESAFIO INCORRETO ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        if pontos == 1:
+            rank = 'Ferro'
+        elif pontos == 2:
+            rank = 'Bronze'
+        elif pontos == 3:
+            rank = 'Prata'
+        elif pontos == 4:
+            rank = 'Ouro'
+        elif pontos == 5:
+            rank = 'Platina'
+        else:
+            rank = 'Sem rank'
+        TELA_RANK = Button(image=None, pos=(640, 270), 
+                                    text_input=f"SEU RANK SERÁ: {rank} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_PONTOS.update(SCREEN)
+        TELA_RANK.update(SCREEN)
+        TELA_DESC.update(SCREEN)
+        SCREEN.blit(ERRADO, (1010,55))
+        BACK = Button(image=None, pos=(640, 450), 
+                            text_input="BACK", font=get_fontlevel(75), base_color="White", hovering_color="Green")
+        BACK.changeColor(LEVEL_MOUSE_POS)
+        BACK.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK.checkForInput(LEVEL_MOUSE_POS):
+                    select_level()
+            pygame.display.update() 
+
+def erro_des2():
+    global rank2
+    while True:
+        LEVEL_MOUSE_POS = pygame.mouse.get_pos()
+        SCREEN.blit(BKP, (0, 0))
+        TELA_PONTOS = Button(image=None, pos=(640, 180), 
+                                    text_input= f"SUA PONTUACAO FOI DE: {pontos2} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_DESC = Button(image=None, pos=(640, 80), text_input= f"DESAFIO INCORRETO ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        if pontos2 == 1:
+            rank2 = 'Ferro'
+        elif pontos2 == 2:
+            rank2 = 'Bronze'
+        elif pontos2 == 3:
+            rank2 = 'Prata'
+        elif pontos2 == 4:
+            rank2 = 'Ouro'
+        elif pontos2 == 5:
+            rank2 = 'Platina'
+        else:
+            rank2 = 'Sem rank'
+        TELA_RANK = Button(image=None, pos=(640, 270), 
+                                    text_input=f"SEU RANK SERÁ: {rank2} ", font=get_fontlevel(75), base_color="#d7fcd4", hovering_color="#d7fcd4")
+        TELA_PONTOS.update(SCREEN)
+        TELA_RANK.update(SCREEN)
+        TELA_DESC.update(SCREEN)
+        SCREEN.blit(ERRADO, (1010,55))
         BACK = Button(image=None, pos=(640, 450), 
                             text_input="BACK", font=get_fontlevel(75), base_color="White", hovering_color="Green")
         BACK.changeColor(LEVEL_MOUSE_POS)
@@ -548,11 +631,11 @@ def desafio1():
                 if A.checkForInput(DES_MOUSE_POS):
                     mostra_pontosdes1()
                 if B.checkForInput(DES_MOUSE_POS):
-                    mostra_pontos()
+                    erro_des1()
                 if C.checkForInput(DES_MOUSE_POS):               
-                    mostra_pontos()
+                    erro_des1()
                 if D.checkForInput(DES_MOUSE_POS):               
-                    mostra_pontos()
+                    erro_des1()
                     
         pygame.display.update()
         
@@ -598,13 +681,13 @@ def desafio2():
                 sys.exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if A.checkForInput(DES_MOUSE_POS):
-                    mostra_pontos2()
+                    erro_des2()
                 if B.checkForInput(DES_MOUSE_POS):
-                    mostra_pontos2()
+                    erro_des2()
                 if C.checkForInput(DES_MOUSE_POS):               
-                    mostra_pontos2()
+                    erro_des2()
                 if D.checkForInput(DES_MOUSE_POS):               
-                    mostra_pontosdes2()
+                    erro_des2()
                     
         pygame.display.update()
         
@@ -737,6 +820,8 @@ def ranks():
             SCREEN.blit(OURO,(340,355))
         elif rank == "Platina":
             SCREEN.blit(PLATINA,(340,355))
+        elif pontos == 0:
+            SCREEN.blit(SEMRANK,(340,355))    
             
         if rank2 == "Ferro":
             SCREEN.blit(FERRO, (830, 355))
@@ -747,7 +832,9 @@ def ranks():
         elif rank2 == "Ouro":
             SCREEN.blit(OURO,(830,355))
         elif rank2 == "Platina":
-            SCREEN.blit(PLATINA,(830,355))    
+            SCREEN.blit(PLATINA,(830,355))
+        elif pontos2 == 0:
+            SCREEN.blit(SEMRANK,(830,355))    
                     
         RANK_RECT = RANK_TEXT.get_rect(center=(640, 120))
         RECT = SEU_RANK.get_rect(center=(400, 300))
@@ -786,17 +873,19 @@ def options():
         OPTIONS_2TEXT = get_font(45).render("onde existem 4 alternativas e, apenas, uma é a correta.", True, "white")
         OPTIONS_3TEXT = get_font(45).render("A cada pergunta correta, um ponto será adicionado ao jogador,", True, "white")
         OPTIONS_4TEXT = get_font(41).render("ao final de cada nível, a pontuação será somada e será determinado o ranking.", True, "white")
-
+        OPTIONS_5TEXT = get_font(41).render("Se o jogador tiver pontuação acima ou igual a 3, será apresentado um desafio.", True, "white")
         
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 120))
         OPTIONS_2RECT = OPTIONS_2TEXT.get_rect(center=(640, 170))
         OPTIONS_3RECT = OPTIONS_3TEXT.get_rect(center=(640, 220))
         OPTIONS_4RECT = OPTIONS_4TEXT.get_rect(center=(640, 270))
+        OPTIONS_5RECT = OPTIONS_5TEXT.get_rect(center=(640, 320))
 
         SCREEN.blit(OPTIONS_TEXT, OPTIONS_RECT)
         SCREEN.blit(OPTIONS_2TEXT, OPTIONS_2RECT)
         SCREEN.blit(OPTIONS_3TEXT, OPTIONS_3RECT)
         SCREEN.blit(OPTIONS_4TEXT, OPTIONS_4RECT)
+        SCREEN.blit(OPTIONS_5TEXT, OPTIONS_5RECT)
 
         OPTIONS_BACK = Button(image=None, pos=(640, 460), 
                             text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
