@@ -873,7 +873,7 @@ def options():
         OPTIONS_2TEXT = get_font(45).render("onde existem 4 alternativas e, apenas, uma é a correta.", True, "white")
         OPTIONS_3TEXT = get_font(45).render("A cada pergunta correta, um ponto será adicionado ao jogador,", True, "white")
         OPTIONS_4TEXT = get_font(41).render("ao final de cada nível, a pontuação será somada e será determinado o ranking.", True, "white")
-        OPTIONS_5TEXT = get_font(41).render("Se o jogador tiver pontuação acima ou igual a 3, será apresentado um desafio.", True, "white")
+        OPTIONS_5TEXT = get_font(41).render("Se o jogador tiver pontuação acima ou igual a 3 será apresentado um desafio.", True, "white")
         
         OPTIONS_RECT = OPTIONS_TEXT.get_rect(center=(640, 120))
         OPTIONS_2RECT = OPTIONS_2TEXT.get_rect(center=(640, 170))
